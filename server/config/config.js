@@ -7,7 +7,7 @@ const config = {
 
     defualt:{
         KODE:"password123",
-        DATABASE: "//mongodb://localhost:27017/Bookie_app",
+        DATABASE: "mongodb://localhost:27017/Bookie_app",
         PORT: 3000 
 
     }
