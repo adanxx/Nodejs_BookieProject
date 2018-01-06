@@ -1,0 +1,6 @@
+C:\Program Files\MongoDB\Server\3.4\bin>mongod.exe --dbpath /Users/AAJ_4/mongo-data
+
+Node-Mongo-Api: mongod.exe --dbpath /Users/AAJ_4/mongo-data
+
+
+Login-App: mongod.exe --dbpath /Program Files/MongoDB/Server/3.4/data/db 
