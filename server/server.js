@@ -5,7 +5,7 @@ const hbs = require("express-handlebars");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const moment = require("moment");
-const config =  require("./config/config").get(process.env.NODE_ENV);
+const config = require("./config/config").get(process.env.NODE_ENV);
 
 /* setting up express-server*/
 const app = express();
@@ -15,10 +15,10 @@ const Port = process.env.Port || 3000;
 
 /* Hbs-setup*/
 app.engine('hbs', hbs({
-    extname:'hbs',
-    defaultLayout:'main',
-    layoutsDir:__dirname +'./../views/layouts',
-    partialsDir:__dirname +'./../views/partials'
+    extname: 'hbs',
+    defaultLayout: 'main',
+    layoutsDir: __dirname + './../views/layouts',
+    partialsDir: __dirname + './../views/partials'
 }));
 app.set('view engine', 'hbs');
 
@@ -28,7 +28,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(config.DATABASE);
 
 /* Setting-up the model-schema for database-table*/
-const {Article} = require('./models/articles');
+const { Article } = require('./models/articles');
 
 
 /* Setting middelware for static-files*/
@@ -40,34 +40,42 @@ app.use(bodyParser.json());
 
 
 /* GET: The application-route setup*/
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
 
-    Article.find().sort({_id:'asc'}).limit(10).exec((err,doc)=>{
-        if(err) return res.status(400).send(err);
-        
-        res.status(200).render('home',{
-            articles:doc
+    Article.find().sort({ _id: 'asc' }).limit(10).exec((err, doc) => {
+        if (err) return res.status(400).send(err);
+
+        res.status(200).render('home', {
+            articles: doc
         });
-        console.log(doc);
-    });  
-    
+    });
 });
 
-app.get('/articles',(req, res)=>{
-  res.render('articles-page');
+app.get('/articles', (req, res) => {
+    res.render('articles-form');
+});
+
+app.get('/article/:id', (req, res) => {
+    Article.findById(req.params.id, (err, data) => {
+        if (err) return res.status(400).send(err);
+        res.render('article-view', {
+            date: moment(data.createdAt).format('MM/DD/YY'),
+            data,
+        })
+    });
 });
 
 /*POST-request from the articles-form*/
-app.post('/api/Add_article',(req, res)=>{
-   
+app.post('/api/Add_article', (req, res) => {
+
     const article = new Article({
-         title:req.body.title,
-         review:req.body.review,
-         rating:req.body.rating
+        title: req.body.title,
+        review: req.body.review,
+        rating: req.body.rating
     });
 
-    article.save((err, data)=>{
-        if(err) return res.status(400).send(err);
+    article.save((err, data) => {
+        if (err) return res.status(400).send(err);
         res.status(200).send('Data Saved!');
     })
 
@@ -88,7 +96,7 @@ app.post('/api/Add_article',(req, res)=>{
 
 
 /* Setting-up server-port*/
-app.listen(config.PORT,()=>{
-console.log(`Application running at port ${config.PORT}`);
+app.listen(config.PORT, () => {
+    console.log(`Application running at port ${config.PORT}`);
 });
 
