@@ -41,7 +41,16 @@ app.use(bodyParser.json());
 
 /* GET: The application-route setup*/
 app.get('/', (req, res)=>{
-    res.render('Home');
+
+    Article.find().sort({_id:'asc'}).limit(10).exec((err,doc)=>{
+        if(err) return res.status(400).send(err);
+        
+        res.status(200).render('home',{
+            articles:doc
+        });
+        console.log(doc);
+    });  
+    
 });
 
 app.get('/articles',(req, res)=>{
@@ -58,7 +67,7 @@ app.post('/api/Add_article',(req, res)=>{
     });
 
     article.save((err, data)=>{
-        if(err) res.status(400).send(err);
+        if(err) return res.status(400).send(err);
         res.status(200).send('Data Saved!');
     })
 
