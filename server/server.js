@@ -25,7 +25,10 @@ app.set('view engine', 'hbs');
 
 /* Setting-up the mongoose and database-connection*/
 mongoose.Promise = global.Promise;
-mongoose.connect(config.DATABASE)
+mongoose.connect(config.DATABASE);
+
+/* Setting-up the model-schema for database-table*/
+const {Article} = require('./models/articles');
 
 
 /* Setting middelware for static-files*/
@@ -47,7 +50,18 @@ app.get('/articles',(req, res)=>{
 
 /*POST-request from the articles-form*/
 app.post('/api/Add_article',(req, res)=>{
-    console.log(req.body);
+   
+    const article = new Article({
+         title:req.body.title,
+         review:req.body.review,
+         rating:req.body.rating
+    });
+
+    article.save((err, data)=>{
+        if(err) res.status(400).send(err);
+        res.status(200).send('Data Saved!');
+    })
+
 })
 
 
