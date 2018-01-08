@@ -5,7 +5,7 @@
             <strong>{{data.Username}}</strong>
         </div>
         <div class="title">
-            <h2>{{data.title}}</h2>
+            <h2 id="headTitle">{{data.title}}</h2>
         </div>
         <div class="content">
             {{data.review}}
@@ -16,33 +16,35 @@
             </div>
         </div>
     </div>
+
     <div class="user_reviews">
         <div class="user_reviews_wrapper">
-            <h3>User reviews:</h3>
-
+            <h3>
+                <b>User reviews :</b>
+            </h3>
+            {{#each reviews}}
             <div class="item">
-                <div class="username">USERNAME -
-                    <span> Rating: RATING/10</span>
+                <div class="username">{{this.Username}} -
+                    <span> Rating : {{this.rating}}/10</span>
                 </div>
                 <div class="user_r">
-                    Excepteur sint occaecat cupidatat non proident, sunt in 
-                    culpa qui officia deserunt mollit anim id est laborum.
+                    {{this.review}}
                 </div>
             </div>
-          </div>
-
+            {{/each}}
+        </div>
         <div class="user_add_reviews_wrapper">
 
             <h3>Add your review</h3>
-            <form id="user_review" data-id="">
+            <form id="user_review" data-id="{{data._id}}">
                 <div>
-                    <input type="hidden" id="titlePost" name="titlePost" value="">
+                    <input type="hidden" id="titlePost" name="titlePost" value="{{data.title}}">
                 </div>
                 <div>
                     <input type="text" id="rating" name="rating" placeholder="Add your rating form 1 to 10">
                 </div>
                 <div>
-                    <textarea id="review" name="review" placeholder="Add your awesome review"></textarea>
+                    <textarea id="review" name="review" placeholder="Add your review"></textarea>
                 </div>
                 <button>Add review</button>
             </form>
@@ -50,8 +52,9 @@
     </div>
 </div>
 
-<script src="/js/validate-review.js"></script>
 <!--
+<script src="/js/validate-review.js"></script>
+-->
 <script>
     $("#user_review").validate({
         rules: {
@@ -74,5 +77,30 @@
             postData();
         }
     });
+
+
+    function postData() {
+        const review = {
+            id: $('#user_review').data('id'),
+            titlePost: $('#titlePost').val(),
+            review: $('#review').val(),
+            rating: $('#rating').val()
+        }
+
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/add_review',
+            data: JSON.stringify(review),
+            contentType: 'application/json',
+            success: () => {
+                window.location.reload(false)
+            },
+            error: () => {
+                alert('Error data not saved !')
+            }
+
+        });
+    }
+
 </script>
--->
