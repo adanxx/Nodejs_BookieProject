@@ -1,10 +1,10 @@
 body {
     font-family: 'Roboto';
     padding:0;
-    margin:0px;
+    margin:0;
 }
 
-/*======= HEADER =========*/
+/*=================== HEADER =======================*/
 
 header {
     background: #5a5a5a;
@@ -25,7 +25,18 @@ header a {
     font-family: Righteous;
 }
 
-/*======= HOME =========*/
+.title_galleri{
+    width: 100%;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif
+
+}
+
+/*==================== Home-view ==================*/
+
+/*==================== Galleri-view ================*/
+
+/*==================== Articles-view ===============*/
 .container.wrapper {
     box-sizing: border-box;
     padding: 10px;
@@ -161,31 +172,7 @@ header a {
     text-decoration: none;
 }
 
-/*======= LOGIN / REGISTER =========*/
-.container_login ,
-.container_register {
-    box-sizing: border-box;
-    padding: 20px;
-}
-
-.container_register h1,
-.container_login h1 {
-    font-size: 25px;
-    color: #6e6e6e;
-    font-weight: 300;
-}
-
-label.error {
-    color: #d25d5d;
-    display: block;
-    margin-bottom: 10px;
-}
-
-#login_form span {
-
-}
-
-/*======= FORMS =========*/
+/*========================== FORMS ===========================*/
 
 input {
     border: 1px solid #dfdfdf;
@@ -235,11 +222,12 @@ button {
     font-style: italic;
   }
 
-/*======= DASHBOARD =========*/
+/*============================ DASHBOARD ===========================*/
 
 .dashboard {
     display: flex;
-    height: 560px;
+    height: 100vh;
+    width: 100%;
 }
 
 .dashboard .dash_body {
@@ -300,3 +288,4 @@ button {
     font-size: 14px;
     color: #e95653;
 }
+
