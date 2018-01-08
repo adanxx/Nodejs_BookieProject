@@ -1,0 +1,20 @@
+<div class="container wrapper">
+
+    {{#each articles}}
+    <a href="/article/{{this._id}}">
+        <div class="item">
+            <div class="top">
+                <div class="title">{{this.title}}</div>
+            </div>
+            <div class="content">
+                {{this.review}}
+            </div>
+            <div class="bottom">
+                <div class="rating">
+                    <span>Rating:</span>{{this.rating}}/12
+                </div>
+            </div>
+        </div>
+    </a>
+    {{/each}}
+</div>

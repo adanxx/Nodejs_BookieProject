@@ -4,7 +4,7 @@ $("#user_review").validate({
         rating: {
             required: true,
             number: true,
-            max: 12
+            max: 10
         }
     },
     messages: {
@@ -20,26 +20,27 @@ $("#user_review").validate({
     }
 });
 
-function postData(){
+
+function postData() {
     const review = {
-        id:$('#user_review').data('id'),
-        titlePost:$('#titlePost').val(),
-        review:$('#review').val(),
-        rating:$('#rating').val()
+        id: $('#user_review').data('id'),
+        titlePost: $('#titlePost').val(),
+        review: $('#review').val(),
+        rating: $('#rating').val()
     }
 
 
     $.ajax({
-      type:'POST',
-      url:'/api/add_review',
-      data:JSON.stringify(review),
-      contentType:'application/json',
-      success:()=>{
-        window.location.reload(false)
-      },
-      error:()=>{
-          alert('Error data not saved !')
-      }
-      
+        type: 'POST',
+        url: '/api/add_review',
+        data: JSON.stringify(review),
+        contentType: 'application/json',
+        success: () => {
+            window.location.reload(false)
+        },
+        error: () => {
+            alert('Error data not saved !')
+        }
+
     });
 }

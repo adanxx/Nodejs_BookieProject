@@ -239,6 +239,7 @@ button {
 
 .dashboard {
     display: flex;
+    height: 560px;
 }
 
 .dashboard .dash_body {

@@ -42,11 +42,20 @@ app.use(bodyParser.json());
 
 /* GET: The application-route setup*/
 app.get('/', (req, res) => {
+    res.render('home');
+});
+
+app.get('/galleri', (req, res) => {
+    res.render('galleri');
+});
+
+
+app.get('/articles-view', (req, res) => {
 
     Article.find().sort({ _id: 'asc' }).limit(10).exec((err, doc) => {
         if (err) return res.status(400).send(err);
 
-        res.status(200).render('home', {
+        res.status(200).render('articles', {
             articles: doc
         });
     });
@@ -72,6 +81,8 @@ app.get('/article/:id', (req, res) => {
         });  
     });
 });
+
+
 
 /*POST-request from the articles/review-form*/
 app.post('/api/Add_article', (req, res) => {
