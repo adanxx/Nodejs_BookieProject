@@ -9,7 +9,9 @@ const config = require("./config/config").get(process.env.NODE_ENV);
 
 /* setting up express-server*/
 const app = express();
-/* The Port-setup for our application during the development-stage*/
+
+/* The Port-setup for our application interchangeable depanding on app is
+   the development or production stage*/
 const Port = process.env.Port || 3000;
 
 
@@ -113,18 +115,6 @@ app.post('/api/add_review', (req, res) => {
         res.status(200).send();
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* Setting-up server-port*/
